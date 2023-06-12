@@ -1,0 +1,73 @@
+<!--
+    Opgave 14:
+I en webapplikation skal du implementere en formular, hvor brugeren kan indtaste sit navn, e-mail og en besked. 
+Skriv en stump HTML-kode, der opretter en formular med de nødvendige inputfelter.
+-->
+
+<form>
+    <label for="name">Navn:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="message">Besked:</label>
+    <textarea id="message" name="message" required></textarea>
+    
+    <button type="submit">Send</button>
+  </form>
+  
+
+  <!--
+    Opgave 17:
+I en webapplikation skal du implementere en navigationsmenu med flere faner. 
+Skriv en stump HTML-kode og CSS-styling, der opretter en simpel navigationsmenu med faner og skifter indholdet afhængigt af den aktive fane.
+  -->
+
+  <div class="tabs">
+    <div class="tab" id="tab1">Fane 1</div>
+    <div class="tab" id="tab2">Fane 2</div>
+    <div class="tab" id="tab3">Fane 3</div>
+  </div>
+  
+  <div class="content" id="content1">
+    Indhold for Fane 1
+  </div>
+  <div class="content" id="content2">
+    Indhold for Fane 2
+  </div>
+  <div class="content" id="content3">
+    Indhold for Fane 3
+  </div>
+  
+  <style>
+    .tabs {
+      display: flex;
+    }
+    
+    .tab {
+      padding: 10px;
+      background-color: lightgray;
+      cursor: pointer;
+    }
+    
+    .content {
+      display: none;
+    }
+  </style>
+  
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".content");
+  
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const tabId = tab.id;
+        contents.forEach(content => {
+          content.style.display = "none";
+        });
+        document.getElementById(`content${tabId.slice(-1)}`).style.display = "block";
+      });
+    });
+  </script>
+  

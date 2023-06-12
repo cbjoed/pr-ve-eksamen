@@ -1,0 +1,129 @@
+<!--
+Opgave 7
+
+Herunder er en stump kode som tilføjer nogle cirkler på siden hvor den placeres. Besvar følgende spørgsmål:
+
+1. Cirklerne forekommer under hinanden. Hvad skal ændres i koden for at de forekommer ved siden af hinanden?
+
+2. Hvad skal ændres i koden, hvis det skal være sådan, at hvis data elementet er mindre end 10, så skal cirklen være orange, ellers skal den være rød.
+
+3. Hvis datasættet indeholder lidt for store værdier, vil cirklerne overlappe. Hvad skal ændres i koden for at det ikke sker?
+
+4. Hvad skal ændres i koden, så at cirklerne vises trinvis? Dvs. først vises den første cirkel og efter 3 sekunder vises cirkel nummer 2 osv.
+
+5. Cirklerne vises som udfyldte. Hvad skal ændres i koden, hvis man vil have cirkler som ikke er udfyldte med blot har en kant?
+ 
+-->
+
+<script type="text/javascript">
+    const Width = 600;
+    const Height = 600;
+    
+    // Selve datasættet
+    const dataset = [15, 5, 10, 25];
+    
+    // Lav SVG-elementet
+    
+    const svg = d3.select("body")
+     .append("svg")
+     .attr("width", Width)
+     .attr("height", Height);
+    
+    // Lav cirkler
+    svg.selectAll("circle")
+     .data(dataset)
+     .enter()
+     .append("circle")
+     .attr("cx", 50)
+     .attr("cy", function (d, i) {
+           return 50 + i * 80;
+     })
+     .attr("r", function (d) {
+           return d * 2;
+     })
+     .attr("fill", "orange");
+    </script>
+
+
+<!--For at besvare spørgsmålene og opnå de ønskede ændringer i koden, skal følgende ændringer foretages:
+
+1. For at placere cirklerne ved siden af hinanden i stedet for under hinanden, skal attributten "cx" ændres for hver cirkel,
+ så den øges i en passende mængde for at skabe den ønskede afstand mellem cirklerne. Følgende linje skal ændres:
+ -->
+
+ .attr("cx", 50)
+
+ <!-- Eksempelvis kan du ændre det til: -->
+
+ .attr("cx", function (d, i) {
+      return 50 + i * 150;
+})
+
+<!--Denne ændring vil øge x-positionen for hver cirkel baseret på deres position i datasættet.-->
+
+
+<!--
+    2.  For at ændre farven af ​​cirklerne baseret på værdien i datasættet, skal "fill" attributten ændres.
+      Du kan bruge en conditional (ternary) operator til at definere betingelsen for farven. Følgende linje skal ændres: 
+-->
+
+.attr("fill", "orange");
+
+<!--Eksempelvis kan du ændre det til:-->
+
+.attr("fill", function (d) {
+      return d < 10 ? "orange" : "red";
+})
+
+<!--Denne ændring vil gøre cirklen orange, hvis værdien er mindre end 10, ellers vil den være rød.-->
+
+
+
+<!--
+     3.  For at undgå overlapning af cirkler, når datasættet indeholder for store værdier,
+       kan vi justere størrelsen på cirklerne og afstanden mellem dem. For at opnå dette kan du ændre følgende linje:
+-->
+
+.attr("r", function (d) {
+      return d * 2;
+})
+
+<!--Eksempelvis kan du ændre det til:-->
+
+.attr("r", function (d) {
+      return Math.sqrt(d) * 5;
+})
+
+<!--Ved at bruge kvadratroden af værdien multipliceret med en passende faktor, kan du justere størrelsen på cirklerne baseret på værdien.-->
+
+
+
+<!--
+      4. For at vise cirklerne trinvis med en forsinkelse mellem dem, 
+      kan du bruge setTimeout-funktionen til at programmere en forsinkelse for tilføjelsen af ​​hver cirkel. Følgende linje skal ændres:
+-->
+
+.enter()
+
+<!--Eksempelvis kan du ændre det til:-->
+
+.enter()
+ .each(function (d, i) {
+       d3.select(this)
+         .transition()
+         .delay(i * 3000)  // 3000 ms = 3 sekunder
+         .attr("opacity", 1);
+})
+
+<!--Denne ændring vil tilføje en forsinkelse på 3 sekunder mellem visningen af ​​hver cirkel ved hjælp af delay-metoden og justere opacity-attributten for at vise cirklerne trinvis.-->
+
+
+<!--
+      For at have cirkler med en kant og ikke udfyldte, skal attributten "fill" ændres til "none", og attribut
+-->
+
+.attr("fill", "orange");
+
+<!--Eksempelvis kan du ændre det til:-->
+
+.attr("none", "orange");
