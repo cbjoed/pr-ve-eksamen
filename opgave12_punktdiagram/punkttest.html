@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Punktdiagram</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+  <svg id="chart" width="800" height="500"></svg>
+
+  <script>
+    // Dine datapunkter
+    var dataset = [[1, 1.3], [5, 2.5], [7, 3.4], [6, 9.1]];
+ 
+    // Erklær to lineære skaleringer
+ const xScale = d3.scaleLinear()
+.domain([1, 90]) // Input domæne (x-værdier)
+.range([0, 800]); // Output domæne (skalering til svg bredde)
+
+const yScale = d3.scaleLinear()
+.domain([0, 12]) // Input domæne (y-værdier)
+.range([500, 0]); // Output domæne (skalering til svg højde)
+    
+// Vælg <body> elementet og tilføj en <svg> til det
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("width", 800)
+      .attr("height", 500);
+
+    // Tilføj cirkler til svg'en baseret på datasettet
+    svg.selectAll("circle")
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) { return d[0] * 50; }) // Juster skalaen for x-aksen
+      .attr("cy", function(d) { return 500 - d[1] * 50; }) // Juster skalaen for y-aksen
+      .attr("r", 5)
+      .attr("fill", "blue");
+  </script>
+</body>
+</html>

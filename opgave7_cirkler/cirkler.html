@@ -59,6 +59,14 @@ Herunder er en stump kode som tilføjer nogle cirkler på siden hvor den placere
       return 50 + i * 150;
 })
 
+<!--
+      hellere bare skift cy og cx 
+      .attr("cy", 50)
+            .attr("cx", function (d, i) {
+                return 50 + i * 80;
+            })
+      -->
+
 <!--Denne ændring vil øge x-positionen for hver cirkel baseret på deres position i datasættet.-->
 
 
@@ -93,6 +101,7 @@ Herunder er en stump kode som tilføjer nogle cirkler på siden hvor den placere
 .attr("r", function (d) {
       return Math.sqrt(d) * 5;
 })
+<!--eller bare ændre tallet til 1-->
 
 <!--Ved at bruge kvadratroden af værdien multipliceret med en passende faktor, kan du justere størrelsen på cirklerne baseret på værdien.-->
 
@@ -103,17 +112,16 @@ Herunder er en stump kode som tilføjer nogle cirkler på siden hvor den placere
       kan du bruge setTimeout-funktionen til at programmere en forsinkelse for tilføjelsen af ​​hver cirkel. Følgende linje skal ændres:
 -->
 
-.enter()
+
 
 <!--Eksempelvis kan du ændre det til:-->
 
-.enter()
- .each(function (d, i) {
-       d3.select(this)
-         .transition()
-         .delay(i * 3000)  // 3000 ms = 3 sekunder
-         .attr("opacity", 1);
-})
+.attr("opacity", 0) // Initially set the opacity to 0
+            .transition() // Apply the transition
+            .delay(function (d, i) {
+                return i * 3000; // 1000 ms = 1 second delay per circle
+            })
+            .attr("opacity", 1); // Transition the opacity to 1
 
 <!--Denne ændring vil tilføje en forsinkelse på 3 sekunder mellem visningen af ​​hver cirkel ved hjælp af delay-metoden og justere opacity-attributten for at vise cirklerne trinvis.-->
 
@@ -126,4 +134,5 @@ Herunder er en stump kode som tilføjer nogle cirkler på siden hvor den placere
 
 <!--Eksempelvis kan du ændre det til:-->
 
-.attr("none", "orange");
+.attr("fill", "none")
+.attr("stroke", "orange");

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3.js Circle Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        const Width = 600;
+        const Height = 600;
+        
+        // Selve datasættet
+        const dataset = [15, 5, 10, 25];
+        
+        // Lav SVG-elementet
+        const svg = d3.select("body")
+            .append("svg")
+            .attr("width", Width)
+            .attr("height", Height);
+        
+        // Lav cirkler
+        svg.selectAll("circle")
+            .data(dataset)
+            .enter()
+            .append("circle")
+            .attr("cy", 50)
+            .attr("cx", function (d, i) {
+                return 50 + i * 80;
+            })
+            .attr("r", function (d) {
+                return d * 1;
+            }) 
+            .attr("fill", "none")
+            .attr("stroke", function (d) {
+                return d < 10 ? "orange" : "red";
+            })
+            .attr("opacity", 0) // Initially set the opacity to 0
+            .transition() // Apply the transition
+            .delay(function (d, i) {
+                return i * 3000; // 3000 ms = 3 second delay per circle
+            })
+            .attr("opacity", 1); // Transition the opacity to 1
+    </script>
+</body>
+</html>
+

@@ -5,7 +5,7 @@ I et Javascript program har vi et datasæt med objekter, som beskriver en række
 */
 
 let dataset = [{name: "Computer", weight: 1.4, price: 4300}, 
-               {name: "screen", weight: 4,2, price: 2000}, 
+               {name: "screen", weight: 4.2, price: 2000}, 
                {name: "coffee machine", weight: 8.2, price: 5300}, 
                {name: "chair", weight: 17.2, price: 3150},
                {name: "light", weight: 1.8, price: 350}];
@@ -62,6 +62,10 @@ function getItemsByMaxTotalWeight(data, maxTotalWeight) {
   
     return result;
   }
+
+  let maxWeight = 20;
+let filteredItems = getItemsByMaxTotalWeight(dataset, maxWeight);
+console.log(filteredItems);
   
   /*
   Denne funktion tager to parametre: data er datasættet, og maxTotalWeight er den maksimale samlede vægt, der tillades. 
